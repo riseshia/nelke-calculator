@@ -1,7 +1,6 @@
 import $ from "jquery";
 import popper from "popper.js";
 import bootstrap from "bootstrap";
-import data from './data';
 
 import Vue from 'vue';
 import App from '../components/App.vue';
