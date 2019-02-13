@@ -7,10 +7,10 @@
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.2.2",
-    "@babel/plugin-proposal-class-properties": "^7.3.0",
-    "@babel/plugin-proposal-decorators": "^7.3.0",
+    "@vue/component-compiler-utils": "^2.5.2",
     "parcel-bundler": "^1.11.0",
-    "sass": "^1.17.0"
+    "sass": "^1.17.0",
+    "vue-template-compiler": "^2.6.6"
   },
   "scripts": {
     "dev": "parcel src/index.html",
@@ -19,6 +19,8 @@
   "dependencies": {
     "bootstrap": "^4.3.0",
     "jquery": "^3.3.1",
-    "popper.js": "^1.14.7"
+    "popper.js": "^1.14.7",
+    "vue": "^2.6.6",
+    "vue-hot-reload-api": "^2.3.2"
   }
 }

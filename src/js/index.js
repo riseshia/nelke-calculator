@@ -3,4 +3,10 @@ import popper from "popper.js";
 import bootstrap from "bootstrap";
 import data from './data';
 
-console.log(data);
+import Vue from 'vue';
+import App from '../components/App.vue';
+
+new Vue({
+  el: '#app',
+  render: h => h(App)
+});
