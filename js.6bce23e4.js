@@ -24,4 +24,4 @@ var t=arguments[3];Object.defineProperty(exports,"__esModule",{value:!0}),export
 },{"../js/data/items":"YJIh"}],"QvaY":[function(require,module,exports) {
 "use strict";var e=p(require("jquery")),r=p(require("popper.js")),u=p(require("bootstrap")),t=p(require("vue")),n=p(require("../components/App.vue"));function p(e){return e&&e.__esModule?e:{default:e}}new t.default({el:"#app",render:function(e){return e(n.default)}});
 },{"jquery":"juYr","popper.js":"lo/u","bootstrap":"BQpi","vue":"QPfz","../components/App.vue":"TC+2"}]},{},["QvaY"], null)
-//# sourceMappingURL=/js.6bce23e4.map
+//# sourceMappingURL=/nelke-calculator/js.6bce23e4.map
