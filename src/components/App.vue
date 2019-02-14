@@ -5,7 +5,7 @@
         Candidate List
         <ul>
           <li v-for="candidate in candidates">
-            <a v-on:click="selectItem" :data-item-name="candidate.item.name" href="#">{{ candidate.item.name }}</a>
+            <a v-on:click="selectItem" :data-item-name="candidate.item.name" href="#">{{ candidate.item.name }} ({{ candidate.item.price }})</a>
           </li>
         </ul>
       </div>
