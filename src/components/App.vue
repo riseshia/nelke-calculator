@@ -2,7 +2,7 @@
   <div id="app" class="container-fluid">
     <div class="row">
       <div class="col-sm-3">
-        Candidate List
+        候補リスト
         <ul>
           <li v-for="candidate in candidates">
             <a v-on:click="selectItem" :data-item-name="candidate.item.name" href="#">{{ candidate.item.name }} ({{ candidate.item.price }})</a>
@@ -12,7 +12,7 @@
       <div class="col-sm-9">
         <div class="row">
           <div class="col-sm">
-            Selected List
+            選択した商品
             <ul>
               <li v-for="selected in selectedItems">
                 <form>
@@ -38,7 +38,19 @@
         </div>
         <div class="row">
           <div class="col-sm">
-            Calculated List(Total cost: {{ totalCost }})
+            計算結果(Total cost: {{ totalCost }})
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm">
+            必要な調合アイテム
+            Required Items
+            <li v-for="item in calculatedItems">
+              {{ item.name }} ({{ item.required }})
+            </li>
+          </div>
+          <div class="col-sm">
+            採取/栽培が必要なもの
             <li v-for="ingredient in calculatedIngredients">
               {{ ingredient.name }} ({{ ingredient.required }})
             </li>
@@ -75,17 +87,23 @@ const calculate = (items, targetItemStates) => {
           required: ingredient.required * item.required,
         })
       })
+    }
+
+    if (result[item.name]) {
+      result[item.name] += item.required
     } else {
-      if (result[item.name]) {
-        result[item.name] += item.required
-      } else {
-        result[item.name] = item.required
-      }
+      result[item.name] = item.required
     }
   }
   const keys = Object.keys(result)
 	keys.sort()
-	return keys.map(key => ({ name: key, required: result[key] }))
+  const targetItemNames = targetItemStates.map(is => is.item.name)
+  const requiredItems = keys.filter(name => !!itemsWithMap[name] && !targetItemNames.includes(name)).map(key => ({ name: key, required: result[key] }))
+  const requiredIngredients = keys.filter(name => !itemsWithMap[name]).map(key => ({ name: key, required: result[key] }))
+  return {
+    requiredItems: requiredItems,
+    requiredIngredients: requiredIngredients,
+  }
 }
 
 export default {
@@ -128,7 +146,10 @@ export default {
       return this.selectedItems.reduce(reducer, 0)
     },
     calculatedIngredients: function () {
-      return calculate(this.items, this.selectedItems)
+      return calculate(this.items, this.selectedItems).requiredIngredients
+    },
+    calculatedItems: function () {
+      return calculate(this.items, this.selectedItems).requiredItems
     },
   }
 }
