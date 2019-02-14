@@ -76,7 +76,7 @@ const calculate = (items, targetItemStates) => {
     return acc
   }, {})
 
-  const queue = targetItemStates.map(i => ({ name: i.item.name, required: i.required }))
+  const queue = targetItemStates.map(i => ({ name: i.item.name, cost: i.item.cost, required: i.required }))
   while (true) {
     if (queue.length === 0) { break }
     const item = queue.pop()
@@ -99,10 +99,12 @@ const calculate = (items, targetItemStates) => {
 	keys.sort()
   const targetItemNames = targetItemStates.map(is => is.item.name)
   const requiredItems = keys.filter(name => !!itemsWithMap[name] && !targetItemNames.includes(name)).map(key => ({ name: key, required: result[key] }))
+  const totalCost = keys.filter(name => !!itemsWithMap[name]).reduce((acc, key) => itemsWithMap[key].cost * result[key] + acc, 0)
   const requiredIngredients = keys.filter(name => !itemsWithMap[name]).map(key => ({ name: key, required: result[key] }))
   return {
     requiredItems: requiredItems,
     requiredIngredients: requiredIngredients,
+    totalCost: totalCost,
   }
 }
 
@@ -142,14 +144,16 @@ export default {
       return this.itemsWithState.filter(i => i.selected === true)
     },
     totalCost: function () {
-      const reducer = (acc, i) => (i.item.cost * i.required + acc)
-      return this.selectedItems.reduce(reducer, 0)
+      return this.calculateResult.totalCost
+    },
+    calculateResult: function () {
+      return calculate(this.items, this.selectedItems)
     },
     calculatedIngredients: function () {
-      return calculate(this.items, this.selectedItems).requiredIngredients
+      return this.calculateResult.requiredIngredients
     },
     calculatedItems: function () {
-      return calculate(this.items, this.selectedItems).requiredItems
+      return this.calculateResult.requiredItems
     },
   }
 }
