@@ -582,7 +582,7 @@ export default [
   cost: 52,
   ingredients:
    [{name: "ぷにぷに玉", required: 1},
-    {name: "ゴルドアイゼン?", required: 1},
+    {name: "ゴルトアイゼン", required: 1},
     {name: "金塊", required: 1},
     {name: "中和剤・黄", required: 1}]},
  {name: "蓄音機",
@@ -636,7 +636,7 @@ export default [
   price: 2922,
   cost: 21,
   ingredients:
-   [{name: "ゴルドアイゼン?", required: 1},
+   [{name: "ゴルトアイゼン", required: 1},
     {name: "光る結晶", required: 1},
     {name: "湖底の溜まり", required: 1},
     {name: "源素・水", required: 5}]},
@@ -707,7 +707,7 @@ export default [
   price: 1716,
   cost: 19,
   ingredients:
-   [{name: "ゴルドアイゼン?", required: 1},
+   [{name: "ゴルトアイゼン", required: 1},
     {name: "レスター隕鉄", required: 1},
     {name: "源素・風", required: 5}]},
  {name: "アルケミーメイル",
@@ -929,7 +929,7 @@ export default [
   cost: 21,
   ingredients:
    [{name: "羊毛", required: 4},
-    {name: "ゴルドアイゼン?", required: 1},
+    {name: "ゴルトアイゼン", required: 1},
     {name: "赤い悪魔", required: 2},
     {name: "源素・火", required: 5}]},
  {name: "ガラスのティアラ",
