@@ -21,6 +21,5 @@
 
 暇になったらやる
 
-- localStorage に selectedItem のリストを保存する
 - Better text
 - Better UI

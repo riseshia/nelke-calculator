@@ -69,6 +69,16 @@ const findTarget = (list, el) => {
   return list.find(e => e.item.name === targetName)
 }
 
+const saveToLocalStorage = (itemWithStates) => {
+  const map = {}
+  itemWithStates.forEach(itemWithState => map[itemWithState.item.name] = itemWithState.required)
+  window.localStorage['selectedItems'] = JSON.stringify(map)
+}
+
+const loadFromLocalStorage = (itemWithStates) => {
+  return window.localStorage['selectedItems'] ? JSON.parse(window.localStorage['selectedItems']) : {}
+}
+
 const calculate = (items, targetItemStates) => {
   const result = {}
   const itemsWithMap = items.reduce((acc, item) => {
@@ -112,7 +122,9 @@ export default {
   name: 'app',
   data () {
     items.sort(function(a, b) { return b.price - a.price })
-    const itemsWithState = items.map(item => ({ item: item, selected: false, required: 1 }))
+    const saveData = loadFromLocalStorage()
+
+    const itemsWithState = items.map(item => ({ item: item, selected: !!saveData[item.name], required: saveData[item.name] || 1 }))
     return {
       itemsWithState: itemsWithState,
       items: items,
@@ -155,6 +167,11 @@ export default {
     calculatedItems: function () {
       return this.calculateResult.requiredItems
     },
+  },
+  watch: {
+    calculateResult: function () {
+      saveToLocalStorage(this.selectedItems)
+    }
   }
 }
 </script>
